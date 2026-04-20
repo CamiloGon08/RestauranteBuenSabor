@@ -1,7 +1,7 @@
-public class Proceso{
+public class proceso{
 
     
-    private Proceso() {}
+    private proceso() {}
 
     /**
     * Calcula la suma de (precio x cantidad) de todos los productos pedidos.
