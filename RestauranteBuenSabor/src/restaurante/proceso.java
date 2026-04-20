@@ -29,4 +29,35 @@ public static double hacerTodo(){
         return contador;
     }
 
+    /**
+     * Aplica descuento del 5% cuando se pidieron más de
+     * MINIMO_PARA_DESCUENTO productos distintos.
+     */
+    public static double aplicarDescuento(double subtotal, int productosDistintos) {
+        if (productosDistintos > Datos.MINIMO_PARA_DESCUENTO) {
+            return subtotal - (subtotal * Datos.TASA_DESCUENTO);
+        }
+        return subtotal;
+    }
+
+    /**
+     * Calcula el IVA sobre la base imponible recibida.
+     */
+    public static double calcularIva(double baseImponible) {
+        return baseImponible * Datos.TASA_IVA;
+    }
+
+    /**
+     * Calcula la propina del 10% sobre el total con IVA
+     * cuando este supera el UMBRAL_PROPINA.
+     */
+    public static double calcularPropina(double totalConIva) {
+        if (totalConIva > Datos.UMBRAL_PROPINA) {
+            return totalConIva * Datos.TASA_PROPINA;
+        }
+        return 0.0;
+    }
+
+    
+
 }
