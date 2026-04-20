@@ -48,7 +48,7 @@ public class RestauranteElBuenSabor {
     // ── Opciones del menú ────────────────────────────────────────────────
 
     private static void verCarta() {
-        Imprimir.mostrarCarta();
+        imprimir.mostrarCarta();
         System.out.println();
     }
 
@@ -83,7 +83,7 @@ public class RestauranteElBuenSabor {
     private static void verPedido() {
         System.out.println();
         if (Utilidades.pedidoTieneProductos()) {
-            Imprimir.mostrarPedido();
+            imprimir.mostrarPedido();
         } else {
             System.out.println("No hay productos en el pedido actual.");
             System.out.println("Use la opcion 2 para agregar productos.");
@@ -99,8 +99,8 @@ public class RestauranteElBuenSabor {
             System.out.println();
             return;
         }
-        Proceso.calcularTotalFactura();
-        Imprimir.imprimirFacturaCompleta();
+        proceso.calcularTotalFactura();
+        imprimir.imprimirFacturaCompleta();
         System.out.println();
     }
 
@@ -109,6 +109,53 @@ public class RestauranteElBuenSabor {
         Utilidades.reiniciarMesa();
         System.out.println("Mesa reiniciada. Lista para nuevo cliente.");
         System.out.println();
+    }
+
+    // ── Métodos auxiliares ───────────────────────────────────────────────
+
+    /**
+     * Solicita y registra el número de mesa cuando la mesa no está activa.
+     * Si el número ingresado no es válido, asigna la mesa 1 por defecto.
+     */
+    private static void registrarNumeroDeMesa() {
+        int mesa = leerEntero("Ingrese numero de mesa: ");
+        if (mesa <= 0) {
+            System.out.println("Numero de mesa invalido. Se asignara la mesa 1.");
+            mesa = 1;
+        }
+        Datos.setNumeroMesa(mesa);
+        Datos.setMesaActiva(true);
+    }
+
+    /**
+     * Valida que el número de producto esté dentro del rango del menú.
+     */
+    private static boolean numeroProductoValido(int numero) {
+        return numero >= 1 && numero <= Datos.getTamanioMenu();
+    }
+
+    /**
+     * Lee un entero desde consola mostrando un mensaje.
+     * Repite la solicitud si el usuario ingresa un valor no numérico.
+     */
+    private static int leerEntero(String mensaje) {
+        System.out.print(mensaje);
+        while (!entrada.hasNextInt()) {
+            entrada.next();
+            System.out.print("Ingrese un numero valido: ");
+        }
+        return entrada.nextInt();
+    }
+
+    /**
+     * Imprime el encabezado de bienvenida al iniciar el sistema.
+     */
+    private static void imprimirBienvenida() {
+        System.out.println(SEPARADOR);
+        System.out.println("    RESTAURANTE " + Datos.NOMBRE_RESTAURANTE);
+        System.out.println("    " + Datos.DIRECCION);
+        System.out.println("    NIT: " + Datos.NIT);
+        System.out.println(SEPARADOR);
     }
 
 }
