@@ -1,11 +1,11 @@
-public class Proceso {
+public class Proceso{
 
-public static double hacerTodo(){
+    
     private Proceso() {}
 
-     /**
-     * Calcula la suma de (precio x cantidad) de todos los productos pedidos.
-     */
+    /**
+    * Calcula la suma de (precio x cantidad) de todos los productos pedidos.
+    */
     public static double calcularSubtotal() {
         double subtotal = 0.0;
         for (Producto producto : Datos.getMenu()) {
