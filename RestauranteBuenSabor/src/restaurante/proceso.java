@@ -58,6 +58,22 @@ public static double hacerTodo(){
         return 0.0;
     }
 
-    
+    /**
+     * Hace el cálculo completo de la factura y actualiza el estado global.
+     * Retorna el total final (subtotal +/- descuento + IVA + propina).
+     */
+    public static double calcularTotalFactura() {
+        double subtotal           = calcularSubtotal();
+        int    productosDistintos = contarProductosPedidos();
+        double baseImponible      = aplicarDescuento(subtotal, productosDistintos);
+        double iva                = calcularIva(baseImponible);
+        double totalConIva        = baseImponible + iva;
+        double propina            = calcularPropina(totalConIva);
+        double totalFinal         = totalConIva + propina;
+
+        Datos.setMesaActiva(true);
+        Datos.setTotalUltimaFactura(totalFinal);
+        return totalFinal;
+    }
 
 }
