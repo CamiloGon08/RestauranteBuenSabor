@@ -41,7 +41,11 @@ public class Producto {
         this.cantidad = 0;
     }
    
-
+    @Override
+    public String toString() {
+        return String.format("Producto{nombre='%s', precio=$%,.0f, cantidad=%d}",
+                nombre, precio, cantidad);
+    }
 
 
 
