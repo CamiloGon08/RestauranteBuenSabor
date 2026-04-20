@@ -131,4 +131,28 @@ public class imprimir {
     }
 
 
+    /**
+     * Imprime la factura con el detalle de cada producto pedido.
+     * Requiere llamar a Proceso.calcularTotalFactura() antes de este método.
+     * Al finalizar incrementa el número de factura y cierra la mesa.
+     */
+    public static void imprimirFacturaCompleta() {
+        imprimirEncabezado(false);
+        imprimirDetalleProductos();
+        imprimirTotales();
+        imprimirPieDePagina();
+
+        Datos.incrementarNumeroFactura();
+        Datos.setMesaActiva(false);
+    }
+
+    /**
+     * Imprime la factura solo con los totales, sin desglosar productos.
+     * Requiere llamar a Proceso.calcularTotalFactura() antes de este método.
+     */
+    public static void imprimirFacturaResumen() {
+        imprimirEncabezado(true);
+        imprimirTotales();
+    }
+
 }
